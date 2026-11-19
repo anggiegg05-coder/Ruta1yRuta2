@@ -1,0 +1,50 @@
+[
+  {
+    "id": "panteon-heroes",
+    "nombre": "Panteón Nacional de los Héroes",
+    "departamento": "Asunción",
+    "ciudad": "Asunción",
+    "categoria": "historia",
+    "wikiTitulo": "Panteón_Nacional_de_los_Héroes"
+  },
+  {
+    "id": "palacio-lopez",
+    "nombre": "Palacio de López",
+    "departamento": "Asunción",
+    "ciudad": "Asunción",
+    "categoria": "historia",
+    "wikiTitulo": "Palacio_de_López"
+  },
+  {
+    "id": "lago-ypacarai",
+    "nombre": "Lago Ypacaraí",
+    "departamento": "Cordillera",
+    "ciudad": "San Bernardino",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Lago_Ypacaraí"
+  },
+  {
+    "id": "saltos-monday",
+    "nombre": "Saltos del Monday",
+    "departamento": "Alto Paraná",
+    "ciudad": "Presidente Franco",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Cataratas_del_Monday"
+  },
+  {
+    "id": "trinidad",
+    "nombre": "Misión Jesuítica de Trinidad",
+    "departamento": "Itapúa",
+    "ciudad": "Trinidad",
+    "categoria": "historia",
+    "wikiTitulo": "Misión_jesuítica_de_La_Santísima_Trinidad_de_Paraná"
+  },
+  {
+    "id": "cerro-cora",
+    "nombre": "Parque Nacional Cerro Corá",
+    "departamento": "Amambay",
+    "ciudad": "Pedro Juan Caballero",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Parque_nacional_Cerro_Corá"
+  }
+]
