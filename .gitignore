@@ -74,3 +74,6 @@ Thumbs.db
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+# Archivos de sistema de Windows
+desktop.ini
+Thumbs.db
