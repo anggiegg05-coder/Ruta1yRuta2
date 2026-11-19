@@ -1,0 +1,7 @@
+{
+  "name": "Ruta1yRuta2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
