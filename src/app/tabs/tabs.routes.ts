@@ -8,27 +8,27 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadComponent: () => import('../tab1/tab1.page').then((m) => m.Tab1Page),
+        path: 'explorar',
+        loadComponent: () => import('../explorar/explorar.page').then((m) => m.ExplorarPage),
       },
       {
-        path: 'tab2',
-        loadComponent: () => import('../tab2/tab2.page').then((m) => m.Tab2Page),
+        path: 'mis-lugares',
+        loadComponent: () => import('../mis-lugares/mis-lugares.page').then((m) => m.MisLugaresPage),
       },
       {
-        path: 'tab3',
-        loadComponent: () => import('../tab3/tab3.page').then((m) => m.Tab3Page),
+        path: 'mi-ruta',
+        loadComponent: () => import('../mi-ruta/mi-ruta.page').then((m) => m.MiRutaPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/explorar',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/explorar',
     pathMatch: 'full',
   },
 ];
