@@ -1,16 +1,17 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-  IonSpinner, IonChip, IonText, IonImg, IonSearchbar,
+  IonSpinner, IonChip, IonText, IonSearchbar,
   IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
 } from '@ionic/angular';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
-import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-explorar',
   templateUrl: './explorar.page.html',
@@ -18,9 +19,9 @@ import { RouterLink } from '@angular/router';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonSpinner, IonChip, IonText, IonImg, IonSearchbar,
+    IonSpinner, IonChip, IonText, IonSearchbar,
     IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
-    CommonModule, RouterLink
+    CommonModule, FormsModule, RouterLink,
   ],
 })
 export class ExplorarPage implements OnInit {

@@ -2,7 +2,7 @@ import { Component, OnInit, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
-  IonSpinner, IonText, IonImg, IonChip, IonList, IonItem, IonLabel,
+  IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
 } from '@ionic/angular';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
@@ -14,7 +14,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
   styleUrls: ['./destino-detalle.page.scss'],
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
-    IonSpinner, IonText, IonImg, IonChip, IonList, IonItem, IonLabel,
+    IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
     CommonModule,
   ],
 })

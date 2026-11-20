@@ -22,7 +22,7 @@
 
   @if (destino(); as d) {
     @if (resumen()?.originalimage; as foto) {
-      <ion-img [src]="foto.source" [alt]="d.nombre" class="foto"></ion-img>
+      <img [src]="foto.source" [alt]="d.nombre" class="foto" loading="lazy" />
     }
 
     <div class="ion-padding">
