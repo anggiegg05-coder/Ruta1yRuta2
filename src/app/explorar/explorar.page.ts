@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-  IonSpinner, IonChip, IonText, IonImg, IonSearchbar,          
+  IonSpinner, IonChip, IonText, IonImg, IonSearchbar,
+  IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
 } from '@ionic/angular';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
@@ -17,7 +18,8 @@ import { Destino, WikiResumen } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonSpinner, IonChip, IonText, IonImg, IonSearchbar,        
+    IonSpinner, IonChip, IonText, IonImg, IonSearchbar,
+    IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
     CommonModule, FormsModule,
   ],
 })
@@ -29,14 +31,33 @@ export class ExplorarPage implements OnInit {
   resumenes = signal<Record<string, WikiResumen>>({});
   cargando = signal(true);
   error = signal('');
-  busqueda = signal('');                                    
-   destinosFiltrados = computed(() => {
+  busqueda = signal('');
+  departamentoSeleccionado = signal('todos');
+  categoriaSeleccionada = signal('todas');
+
+  departamentos = computed(() =>
+    [...new Set(this.destinos().map((d) => d.departamento))].sort()
+  );
+
+  categorias = computed(() =>
+    [...new Set(this.destinos().map((d) => d.categoria))].sort()
+  );
+
+  destinosFiltrados = computed(() => {
     const texto = this.normalizar(this.busqueda());
-    return this.destinos().filter((destino) =>
-      this.normalizar(destino.nombre).includes(texto) ||
-      this.normalizar(destino.ciudad).includes(texto) ||
-      this.normalizar(destino.departamento).includes(texto)
-    );
+    const dep = this.departamentoSeleccionado();
+    const cat = this.categoriaSeleccionada();
+
+    return this.destinos().filter((destino) => {
+      const coincideTexto =
+        this.normalizar(destino.nombre).includes(texto) ||
+        this.normalizar(destino.ciudad).includes(texto) ||
+        this.normalizar(destino.departamento).includes(texto);
+      const coincideDepartamento = dep === 'todos' || destino.departamento === dep;
+      const coincideCategoria = cat === 'todas' || destino.categoria === cat;
+
+      return coincideTexto && coincideDepartamento && coincideCategoria;
+    });
   });
 
   ngOnInit() {
@@ -57,6 +78,14 @@ export class ExplorarPage implements OnInit {
 
   buscar(evento: CustomEvent) {
     this.busqueda.set(evento.detail.value ?? '');
+  }
+
+  cambiarDepartamento(evento: CustomEvent) {
+    this.departamentoSeleccionado.set(evento.detail.value);
+  }
+
+  cambiarCategoria(evento: CustomEvent) {
+    this.categoriaSeleccionada.set(evento.detail.value);
   }
 
   private cargarResumenes(destinos: Destino[]) {
