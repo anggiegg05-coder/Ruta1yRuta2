@@ -1,10 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-  IonSpinner, IonChip, IonText, IonImg,
+  IonSpinner, IonChip, IonText, IonImg, IonSearchbar,          
 } from '@ionic/angular';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
@@ -17,7 +17,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonSpinner, IonChip, IonText, IonImg,
+    IonSpinner, IonChip, IonText, IonImg, IonSearchbar,        
     CommonModule, FormsModule,
   ],
 })
@@ -29,6 +29,13 @@ export class ExplorarPage implements OnInit {
   resumenes = signal<Record<string, WikiResumen>>({});
   cargando = signal(true);
   error = signal('');
+  busqueda = signal('');                                    
+  destinosFiltrados = computed(() => {
+    const texto = this.normalizar(this.busqueda());
+    return this.destinos().filter((destino) =>
+      this.normalizar(destino.nombre).includes(texto)
+    );
+  });
 
   ngOnInit() {
     this.cargando.set(true);
@@ -46,6 +53,10 @@ export class ExplorarPage implements OnInit {
     });
   }
 
+  buscar(evento: CustomEvent) {
+    this.busqueda.set(evento.detail.value ?? '');
+  }
+
   private cargarResumenes(destinos: Destino[]) {
     for (const destino of destinos) {
       if (!destino.wikiTitulo) {
@@ -60,5 +71,9 @@ export class ExplorarPage implements OnInit {
         },
       });
     }
+  }
+
+  private normalizar(texto: string): string {
+    return texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
   }
 }

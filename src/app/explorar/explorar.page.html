@@ -10,36 +10,42 @@
       <ion-title size="large">Explorar</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-searchbar placeholder="Buscar destino..." [debounce]="300" (ionInput)="buscar($event)">
+  </ion-searchbar>
 
   @if (cargando()) {
-    <div class="centrado">
-      <ion-spinner name="crescent"></ion-spinner>
-      <p>Cargando destinos...</p>
-    </div>
+  <div class="centrado">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Cargando destinos...</p>
+  </div>
   }
 
   @if (error()) {
-    <ion-text color="danger">
-      <p class="centrado">{{ error() }}</p>
-    </ion-text>
+  <ion-text color="danger">
+    <p class="centrado">{{ error() }}</p>
+  </ion-text>
   }
 
-    @for (destino of destinos(); track destino.id) {
-    <ion-card>
-      @if (resumenes()[destino.id]?.thumbnail; as foto) {
-        <ion-img [src]="foto.source" [alt]="destino.nombre" class="foto"></ion-img>
+  @for (destino of destinosFiltrados(); track destino.id) {
+  <ion-card>
+    @if (resumenes()[destino.id]?.thumbnail; as foto) {
+    <ion-img [src]="foto.source" [alt]="destino.nombre" class="foto"></ion-img>
+    }
+    <ion-card-header>
+      <ion-card-title>{{ destino.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ destino.ciudad }}, {{ destino.departamento }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-chip>{{ destino.categoria }}</ion-chip>
+      @if (resumenes()[destino.id]; as resumen) {
+      <p class="descripcion">{{ resumen.extract }}</p>
+      <p class="fuente">Fuente: Wikipedia</p>
       }
-      <ion-card-header>
-        <ion-card-title>{{ destino.nombre }}</ion-card-title>
-        <ion-card-subtitle>{{ destino.ciudad }}, {{ destino.departamento }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-chip>{{ destino.categoria }}</ion-chip>
-        @if (resumenes()[destino.id]; as resumen) {
-          <p class="descripcion">{{ resumen.extract }}</p>
-          <p class="fuente">Fuente: Wikipedia</p>
-        }
-      </ion-card-content>
-    </ion-card>
+
+    </ion-card-content>
+  </ion-card>
+  }
+  @if (!cargando() && !error() && destinosFiltrados().length === 0) {
+  <p class="centrado">No se encontraron destinos para "{{ busqueda() }}".</p>
   }
 </ion-content>
