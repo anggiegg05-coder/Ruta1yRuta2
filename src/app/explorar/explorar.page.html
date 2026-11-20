@@ -10,4 +10,29 @@
       <ion-title size="large">Explorar</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  @if (cargando()) {
+    <div class="centrado">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando destinos...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <ion-text color="danger">
+      <p class="centrado">{{ error() }}</p>
+    </ion-text>
+  }
+
+  @for (destino of destinos(); track destino.id) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ destino.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ destino.ciudad }}, {{ destino.departamento }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-chip>{{ destino.categoria }}</ion-chip>
+      </ion-card-content>
+    </ion-card>
+  }
 </ion-content>
