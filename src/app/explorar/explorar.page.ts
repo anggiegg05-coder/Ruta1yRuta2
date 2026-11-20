@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar,
   IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-  IonSpinner, IonChip, IonText,
+  IonSpinner, IonChip, IonText, IonImg,
 } from '@ionic/angular';
 import { DestinosService } from '../services/destinos';
-import { Destino } from '../models/destino.model';
+import { WikipediaService } from '../services/wikipedia';
+import { Destino, WikiResumen } from '../models/destino.model';
 
 @Component({
   selector: 'app-explorar',
@@ -16,13 +17,16 @@ import { Destino } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar,
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
-    IonSpinner, IonChip, IonText,
+    IonSpinner, IonChip, IonText, IonImg,
     CommonModule, FormsModule,
   ],
 })
 export class ExplorarPage implements OnInit {
   private destinosService = inject(DestinosService);
+  private wikipediaService = inject(WikipediaService);
+
   destinos = signal<Destino[]>([]);
+  resumenes = signal<Record<string, WikiResumen>>({});
   cargando = signal(true);
   error = signal('');
 
@@ -32,6 +36,7 @@ export class ExplorarPage implements OnInit {
       next: (datos) => {
         this.destinos.set(datos);
         this.cargando.set(false);
+        this.cargarResumenes(datos);
       },
       error: (err) => {
         console.error('Error al cargar destinos:', err);
@@ -39,5 +44,21 @@ export class ExplorarPage implements OnInit {
         this.cargando.set(false);
       },
     });
+  }
+
+  private cargarResumenes(destinos: Destino[]) {
+    for (const destino of destinos) {
+      if (!destino.wikiTitulo) {
+        continue;
+      }
+      this.wikipediaService.obtenerResumen(destino.wikiTitulo).subscribe({
+        next: (resumen) => {
+          this.resumenes.update((actual) => ({ ...actual, [destino.id]: resumen }));
+        },
+        error: (err) => {
+          console.warn('No se pudo cargar Wikipedia para', destino.nombre, err);
+        },
+      });
+    }
   }
 }

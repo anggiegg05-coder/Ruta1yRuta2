@@ -2,3 +2,20 @@
   text-align: center;
   padding: 24px;
 }
+.foto::part(image) {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.descripcion {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fuente {
+  font-size: 12px;
+  opacity: 0.6;
+}
