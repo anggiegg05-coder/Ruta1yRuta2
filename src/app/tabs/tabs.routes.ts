@@ -24,6 +24,11 @@ export const routes: Routes = [
         redirectTo: '/tabs/explorar',
         pathMatch: 'full',
       },
+            {
+        path: 'explorar/:id',
+        loadComponent: () =>
+          import('../destino-detalle/destino-detalle.page').then((m) => m.DestinoDetallePage),
+      },
     ],
   },
   {

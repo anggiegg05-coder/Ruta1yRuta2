@@ -53,7 +53,7 @@
   }
 
   @for (destino of destinosFiltrados(); track destino.id) {
-  <ion-card>
+  <ion-card [routerLink]="['/tabs/explorar', destino.id]" button>
     @if (resumenes()[destino.id]?.thumbnail; as foto) {
     <ion-img [src]="foto.source" [alt]="destino.nombre" class="foto"></ion-img>
     }

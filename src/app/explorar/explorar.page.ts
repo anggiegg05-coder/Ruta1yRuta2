@@ -10,7 +10,7 @@ import {
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-explorar',
   templateUrl: './explorar.page.html',
@@ -20,7 +20,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonSpinner, IonChip, IonText, IonImg, IonSearchbar,
     IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
-    CommonModule, FormsModule,
+    CommonModule, RouterLink
   ],
 })
 export class ExplorarPage implements OnInit {
