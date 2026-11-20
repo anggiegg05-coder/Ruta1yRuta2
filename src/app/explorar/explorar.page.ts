@@ -30,10 +30,12 @@ export class ExplorarPage implements OnInit {
   cargando = signal(true);
   error = signal('');
   busqueda = signal('');                                    
-  destinosFiltrados = computed(() => {
+   destinosFiltrados = computed(() => {
     const texto = this.normalizar(this.busqueda());
     return this.destinos().filter((destino) =>
-      this.normalizar(destino.nombre).includes(texto)
+      this.normalizar(destino.nombre).includes(texto) ||
+      this.normalizar(destino.ciudad).includes(texto) ||
+      this.normalizar(destino.departamento).includes(texto)
     );
   });
 
