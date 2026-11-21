@@ -5,9 +5,67 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mis lugares</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="estadisticas">
+    <ion-chip color="danger">Favoritos: {{ favoritosLista().length }}</ion-chip>
+    <ion-chip color="success">Visitados: {{ visitadosLista().length }}</ion-chip>
+    <ion-chip color="warning">Pendientes: {{ pendientes() }}</ion-chip>
+  </div>
+
+  <ion-segment [value]="vista()" (ionChange)="cambiarVista($event)">
+    <ion-segment-button value="favoritos">
+      <ion-label>Favoritos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="visitados">
+      <ion-label>Visitados</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  @if (cargando()) {
+    <div class="centrado">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  }
+
+  @if (error()) {
+    <ion-text color="danger">
+      <p class="centrado">{{ error() }}</p>
+    </ion-text>
+  }
+
+  @if (!cargando() && !error()) {
+    <ion-list>
+      @for (d of listaActual(); track d.id) {
+        <ion-item>
+          <ion-label>
+            <h2>{{ d.nombre }}</h2>
+            <p>{{ d.ciudad }}, {{ d.departamento }}</p>
+          </ion-label>
+
+          @if (vista() === 'favoritos') {
+            <ion-badge slot="end" [color]="misLugares.esVisitado(d.id) ? 'success' : 'warning'">
+              {{ misLugares.esVisitado(d.id) ? 'Visitado' : 'Pendiente' }}
+            </ion-badge>
+            <ion-button slot="end" fill="clear" color="success" (click)="misLugares.alternarVisitado(d.id)">
+              <ion-icon slot="icon-only" [name]="misLugares.esVisitado(d.id) ? 'checkmark-circle' : 'checkmark-circle-outline'"></ion-icon>
+            </ion-button>
+            <ion-button slot="end" fill="clear" color="danger" (click)="misLugares.alternarFavorito(d.id)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          } @else {
+            <ion-button slot="end" fill="clear" color="danger" (click)="misLugares.alternarVisitado(d.id)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          }
+        </ion-item>
+      } @empty {
+        <ion-text color="medium">
+          <p class="centrado">
+            {{ vista() === 'favoritos'
+              ? 'Todavía no tenés favoritos. Tocá «Agregar a favoritos» en el detalle de un destino.'
+              : 'Todavía no marcaste lugares como visitados.' }}
+          </p>
+        </ion-text>
+      }
+    </ion-list>
+  }
 </ion-content>
