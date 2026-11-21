@@ -52,6 +52,12 @@
         }
       </ion-list>
 
+      <!-- NUEVO: botón de Google Maps -->
+      <ion-button expand="block" (click)="abrirEnGoogleMaps()">
+        <ion-icon slot="start" name="map-outline"></ion-icon>
+        Abrir en Google Maps
+      </ion-button>
+
       @if (resumen(); as r) {
         <p>{{ r.extract }}</p>
         <p class="fuente">Fuente: Wikipedia</p>

@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
   IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
+  IonButton, IonIcon, // NUEVO
 } from '@ionic/angular';
+import { addIcons } from 'ionicons'; // NUEVO
+import { mapOutline } from 'ionicons/icons'; // NUEVO
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
@@ -15,6 +18,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
     IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
+    IonButton, IonIcon, // NUEVO
     CommonModule,
   ],
 })
@@ -28,6 +32,11 @@ export class DestinoDetallePage implements OnInit {
   resumen = signal<WikiResumen | undefined>(undefined);
   cargando = signal(true);
   error = signal('');
+
+  // NUEVO: registra el ícono del mapa
+  constructor() {
+    addIcons({ mapOutline });
+  }
 
   ngOnInit() {
     this.destinosService.obtenerDestinoPorId(this.id()).subscribe({
@@ -46,6 +55,22 @@ export class DestinoDetallePage implements OnInit {
         this.cargando.set(false);
       },
     });
+  }
+
+  // NUEVO: arma el enlace de Google Maps y lo abre
+  abrirEnGoogleMaps() {
+    const d = this.destino();
+    if (!d) {
+      return;
+    }
+
+    const coordenadas = this.resumen()?.coordinates;
+    const consulta = coordenadas
+      ? `${coordenadas.lat},${coordenadas.lon}`
+      : `${d.nombre}, ${d.ciudad}, Paraguay`;
+
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
+    window.open(url, '_blank');
   }
 
   private cargarResumen(destino: Destino) {
