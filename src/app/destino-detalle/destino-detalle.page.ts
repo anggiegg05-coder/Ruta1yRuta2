@@ -6,7 +6,7 @@ import {
   IonButton, IonIcon, // NUEVO
 } from '@ionic/angular';
 import { addIcons } from 'ionicons'; 
-import { mapOutline, heart, heartOutline } from 'ionicons/icons'; 
+import { mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline } from 'ionicons/icons'; 
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
@@ -36,7 +36,7 @@ export class DestinoDetallePage implements OnInit {
   error = signal('');
 
   constructor() {
-    addIcons({ mapOutline, heart, heartOutline });
+    addIcons({ mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline });
   }
 
   ngOnInit() {

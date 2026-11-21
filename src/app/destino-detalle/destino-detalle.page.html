@@ -67,5 +67,9 @@
         <ion-icon slot="start" [name]="misLugares.esFavorito(d.id) ? 'heart' : 'heart-outline'"></ion-icon>
         {{ misLugares.esFavorito(d.id) ? 'Quitar de favoritos' : 'Agregar a favoritos' }}
       </ion-button>
+            <ion-button expand="block" fill="outline" color="success" (click)="misLugares.alternarVisitado(d.id)">
+        <ion-icon slot="start" [name]="misLugares.esVisitado(d.id) ? 'checkmark-circle' : 'checkmark-circle-outline'"></ion-icon>
+        {{ misLugares.esVisitado(d.id) ? 'Visitado' : 'Marcar como visitado' }}
+      </ion-button>
   }
 </ion-content>
