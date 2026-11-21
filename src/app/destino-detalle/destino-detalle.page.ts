@@ -5,11 +5,12 @@ import {
   IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
   IonButton, IonIcon, // NUEVO
 } from '@ionic/angular';
-import { addIcons } from 'ionicons'; // NUEVO
-import { mapOutline } from 'ionicons/icons'; // NUEVO
+import { addIcons } from 'ionicons'; 
+import { mapOutline, heart, heartOutline } from 'ionicons/icons'; 
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
+import { MisLugaresService } from '../services/mis-lugares';
 
 @Component({
   selector: 'app-destino-detalle',
@@ -18,7 +19,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
     IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
-    IonButton, IonIcon, // NUEVO
+    IonButton, IonIcon, 
     CommonModule,
   ],
 })
@@ -27,15 +28,15 @@ export class DestinoDetallePage implements OnInit {
 
   private destinosService = inject(DestinosService);
   private wikipediaService = inject(WikipediaService);
+    misLugares = inject(MisLugaresService);
 
   destino = signal<Destino | undefined>(undefined);
   resumen = signal<WikiResumen | undefined>(undefined);
   cargando = signal(true);
   error = signal('');
 
-  // NUEVO: registra el ícono del mapa
   constructor() {
-    addIcons({ mapOutline });
+    addIcons({ mapOutline, heart, heartOutline });
   }
 
   ngOnInit() {
@@ -57,7 +58,6 @@ export class DestinoDetallePage implements OnInit {
     });
   }
 
-  // NUEVO: arma el enlace de Google Maps y lo abre
   abrirEnGoogleMaps() {
     const d = this.destino();
     if (!d) {

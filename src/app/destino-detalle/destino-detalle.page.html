@@ -63,5 +63,9 @@
         <p class="fuente">Fuente: Wikipedia</p>
       }
     </div>
+          <ion-button expand="block" fill="outline" (click)="misLugares.alternarFavorito(d.id)">
+        <ion-icon slot="start" [name]="misLugares.esFavorito(d.id) ? 'heart' : 'heart-outline'"></ion-icon>
+        {{ misLugares.esFavorito(d.id) ? 'Quitar de favoritos' : 'Agregar a favoritos' }}
+      </ion-button>
   }
 </ion-content>
