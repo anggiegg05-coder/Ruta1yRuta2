@@ -6,7 +6,6 @@ const CLAVE_RUTA = 'ruta1yruta2_ruta';
   providedIn: 'root',
 })
 export class RutaService {
-  // Ids de los destinos, en el orden de la ruta
   paradas = signal<string[]>(this.leer());
 
   estaEnRuta(id: string): boolean {
@@ -32,6 +31,11 @@ export class RutaService {
     } else {
       this.agregar(id);
     }
+  }
+
+  reordenar(nuevoOrden: string[]) {
+    this.paradas.set(nuevoOrden);
+    this.guardar();
   }
 
   private leer(): string[] {

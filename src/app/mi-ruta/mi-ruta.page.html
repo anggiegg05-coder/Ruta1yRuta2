@@ -5,9 +5,45 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Mi ruta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  @if (cargando()) {
+    <div class="centrado">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  }
+
+  @if (error()) {
+    <ion-text color="danger">
+      <p class="centrado">{{ error() }}</p>
+    </ion-text>
+  }
+
+  @if (!cargando() && !error()) {
+    @if (paradas().length > 0) {
+      <p class="ayuda">Arrastrá ☰ para cambiar el orden de las paradas.</p>
+    }
+
+    <ion-list>
+      <ion-reorder-group [disabled]="false" (ionItemReorder)="reordenar($event)">
+        @for (d of paradas(); track d.id; let i = $index) {
+          <ion-item>
+            <ion-badge slot="start" color="tertiary">{{ i + 1 }}</ion-badge>
+            <ion-label>
+              <h2>{{ d.nombre }}</h2>
+              <p>{{ d.ciudad }}, {{ d.departamento }}</p>
+            </ion-label>
+            <ion-button slot="end" fill="clear" color="danger" (click)="ruta.quitar(d.id)">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+            <ion-reorder slot="end"></ion-reorder>
+          </ion-item>
+        }
+      </ion-reorder-group>
+    </ion-list>
+
+    @if (paradas().length === 0) {
+      <ion-text color="medium">
+        <p class="centrado">Tu ruta está vacía. Tocá «Agregar a mi ruta» en el detalle de un destino.</p>
+      </ion-text>
+    }
+  }
 </ion-content>
