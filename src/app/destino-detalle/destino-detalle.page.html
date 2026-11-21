@@ -71,5 +71,9 @@
         <ion-icon slot="start" [name]="misLugares.esVisitado(d.id) ? 'checkmark-circle' : 'checkmark-circle-outline'"></ion-icon>
         {{ misLugares.esVisitado(d.id) ? 'Visitado' : 'Marcar como visitado' }}
       </ion-button>
+            <ion-button expand="block" fill="outline" color="tertiary" (click)="ruta.alternar(d.id)">
+        <ion-icon slot="start" [name]="ruta.estaEnRuta(d.id) ? 'remove-circle-outline' : 'add-circle-outline'"></ion-icon>
+        {{ ruta.estaEnRuta(d.id) ? 'Quitar de mi ruta' : 'Agregar a mi ruta' }}
+      </ion-button>
   }
 </ion-content>

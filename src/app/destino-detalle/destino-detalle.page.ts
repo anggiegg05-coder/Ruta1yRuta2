@@ -3,14 +3,18 @@ import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
   IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
-  IonButton, IonIcon, // NUEVO
+  IonButton, IonIcon,
 } from '@ionic/angular';
-import { addIcons } from 'ionicons'; 
-import { mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline } from 'ionicons/icons'; 
+import { addIcons } from 'ionicons';
+import {
+  mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
+  addCircleOutline, removeCircleOutline, // NUEVO
+} from 'ionicons/icons';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
-import { Destino, WikiResumen } from '../models/destino.model';
 import { MisLugaresService } from '../services/mis-lugares';
+import { RutaService } from '../services/ruta'; // NUEVO
+import { Destino, WikiResumen } from '../models/destino.model';
 
 @Component({
   selector: 'app-destino-detalle',
@@ -19,7 +23,7 @@ import { MisLugaresService } from '../services/mis-lugares';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
     IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
-    IonButton, IonIcon, 
+    IonButton, IonIcon,
     CommonModule,
   ],
 })
@@ -28,7 +32,8 @@ export class DestinoDetallePage implements OnInit {
 
   private destinosService = inject(DestinosService);
   private wikipediaService = inject(WikipediaService);
-    misLugares = inject(MisLugaresService);
+  misLugares = inject(MisLugaresService);
+  ruta = inject(RutaService); // NUEVO
 
   destino = signal<Destino | undefined>(undefined);
   resumen = signal<WikiResumen | undefined>(undefined);
@@ -36,7 +41,10 @@ export class DestinoDetallePage implements OnInit {
   error = signal('');
 
   constructor() {
-    addIcons({ mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline });
+    addIcons({
+      mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
+      addCircleOutline, removeCircleOutline, // NUEVO
+    });
   }
 
   ngOnInit() {
