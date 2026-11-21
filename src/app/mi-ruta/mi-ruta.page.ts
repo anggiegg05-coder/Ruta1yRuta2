@@ -6,7 +6,7 @@ import {
   IonReorderGroup, IonReorder, ItemReorderEventDetail,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { trashOutline } from 'ionicons/icons';
+import { trashOutline, navigateOutline } from 'ionicons/icons'; // NUEVO: navigateOutline
 import { DestinosService } from '../services/destinos';
 import { RutaService } from '../services/ruta';
 import { Destino } from '../models/destino.model';
@@ -30,7 +30,6 @@ export class MiRutaPage implements OnInit {
   cargando = signal(true);
   error = signal('');
 
-  // Los destinos completos, en el orden de la ruta
   paradas = computed(() =>
     this.ruta
       .paradas()
@@ -39,7 +38,7 @@ export class MiRutaPage implements OnInit {
   );
 
   constructor() {
-    addIcons({ trashOutline });
+    addIcons({ trashOutline, navigateOutline }); // NUEVO: navigateOutline
   }
 
   ngOnInit() {
@@ -56,9 +55,36 @@ export class MiRutaPage implements OnInit {
     });
   }
 
-  // Se ejecuta cuando soltás un ítem en otra posición
   reordenar(event: CustomEvent<ItemReorderEventDetail>) {
     const nuevoOrden: Destino[] = event.detail.complete(this.paradas());
     this.ruta.reordenar(nuevoOrden.map((d) => d.id));
+  }
+
+  abrirRutaEnGoogleMaps() {
+    const lista = this.paradas();
+    if (lista.length === 0) {
+      return;
+    }
+
+    const lugares = lista.map((d) => this.textoDeLugar(d));
+    const destino = lugares[lugares.length - 1];
+
+    let url = `https://www.google.com/maps/dir/?api=1&travelmode=driving`;
+    url += `&destination=${encodeURIComponent(destino)}`;
+
+    if (lugares.length > 1) {
+      const origen = lugares[0];
+      const intermedias = lugares.slice(1, -1);
+      url += `&origin=${encodeURIComponent(origen)}`;
+      if (intermedias.length > 0) {
+        url += `&waypoints=${encodeURIComponent(intermedias.join('|'))}`;
+      }
+    }
+
+    window.open(url, '_blank');
+  }
+
+    private textoDeLugar(d: Destino): string {
+    return `${d.nombre}, ${d.ciudad}, Paraguay`;
   }
 }

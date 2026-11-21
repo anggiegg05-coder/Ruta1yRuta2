@@ -39,6 +39,20 @@
         }
       </ion-reorder-group>
     </ion-list>
+        @if (paradas().length > 0) {
+      <div class="ion-padding">
+        <ion-button expand="block" (click)="abrirRutaEnGoogleMaps()">
+          <ion-icon slot="start" name="navigate-outline"></ion-icon>
+          Abrir ruta en Google Maps
+        </ion-button>
+
+        @if (paradas().length > 5) {
+          <ion-text color="medium">
+            <p class="ayuda">En el navegador del celular, Google Maps puede mostrar solo algunas paradas. En la app de Google Maps se ven todas (hasta 11).</p>
+          </ion-text>
+        }
+      </div>
+    }
 
     @if (paradas().length === 0) {
       <ion-text color="medium">
