@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
   IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
-  IonButton, IonIcon,
+  IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import {
   mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
-  addCircleOutline, removeCircleOutline, // NUEVO
+  addCircleOutline, removeCircleOutline,
 } from 'ionicons/icons';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { MisLugaresService } from '../services/mis-lugares';
-import { RutaService } from '../services/ruta'; // NUEVO
+import { RutaService } from '../services/ruta';
 import { Destino, WikiResumen } from '../models/destino.model';
 
 @Component({
@@ -23,7 +23,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
   imports: [
     IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton,
     IonSpinner, IonText, IonChip, IonList, IonItem, IonLabel,
-    IonButton, IonIcon,
+    IonButton, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent,
     CommonModule,
   ],
 })
@@ -33,7 +33,7 @@ export class DestinoDetallePage implements OnInit {
   private destinosService = inject(DestinosService);
   private wikipediaService = inject(WikipediaService);
   misLugares = inject(MisLugaresService);
-  ruta = inject(RutaService); // NUEVO
+  ruta = inject(RutaService);
 
   destino = signal<Destino | undefined>(undefined);
   resumen = signal<WikiResumen | undefined>(undefined);
@@ -43,7 +43,7 @@ export class DestinoDetallePage implements OnInit {
   constructor() {
     addIcons({
       mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
-      addCircleOutline, removeCircleOutline, // NUEVO
+      addCircleOutline, removeCircleOutline,
     });
   }
 
