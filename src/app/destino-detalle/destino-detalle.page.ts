@@ -66,6 +66,7 @@ export class DestinoDetallePage implements OnInit {
     });
   }
 
+  // NUEVO: prioridad 1) coordenadas del JSON, 2) de Wikipedia, 3) nombre del lugar
   abrirEnGoogleMaps() {
     const d = this.destino();
     if (!d) {
@@ -73,9 +74,13 @@ export class DestinoDetallePage implements OnInit {
     }
 
     const coordenadas = this.resumen()?.coordinates;
-    const consulta = coordenadas
-      ? `${coordenadas.lat},${coordenadas.lon}`
-      : `${d.nombre}, ${d.ciudad}, Paraguay`;
+    let consulta = `${d.nombre}, ${d.ciudad}, Paraguay`;
+
+    if (d.lat !== undefined && d.lon !== undefined) {
+      consulta = `${d.lat},${d.lon}`;
+    } else if (coordenadas) {
+      consulta = `${coordenadas.lat},${coordenadas.lon}`;
+    }
 
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
     window.open(url, '_blank');

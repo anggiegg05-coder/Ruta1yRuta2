@@ -21,7 +21,7 @@
   }
 
   @if (destino(); as d) {
-    <!-- PORTADA -->
+    
     <div class="portada">
       @if (resumen()?.originalimage; as foto) {
         <div class="foto" role="img" [attr.aria-label]="d.nombre"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="contenido">
-      <!-- FILA DE ACCIONES -->
+      
       <div class="acciones">
         <ion-button fill="clear" color="primary" class="accion" (click)="abrirEnGoogleMaps()">
           <div class="accion-contenido">
@@ -67,7 +67,7 @@
         </ion-button>
       </div>
 
-      <!-- DESCRIPCIÓN (primero) -->
+      
       @if (resumen(); as r) {
         <section class="seccion">
           <h2>Sobre este lugar</h2>
@@ -76,7 +76,7 @@
         </section>
       }
 
-      <!-- INFORMACIÓN -->
+      
       <ion-card>
         <ion-card-header>
           <ion-card-title>Información</ion-card-title>
@@ -95,13 +95,24 @@
                 <p>{{ d.departamento }}</p>
               </ion-label>
             </ion-item>
-            @if (resumen()?.coordinates; as c) {
+
+            
+            @if (d.lat !== undefined && d.lon !== undefined) {
               <ion-item lines="none">
                 <ion-label class="dato">
                   <h3>Ubicación</h3>
-                  <p>{{ c.lat }}, {{ c.lon }}</p>
+                  <p>{{ d.lat }}, {{ d.lon }}</p>
                 </ion-label>
               </ion-item>
+            } @else {
+              @if (resumen()?.coordinates; as c) {
+                <ion-item lines="none">
+                  <ion-label class="dato">
+                    <h3>Ubicación</h3>
+                    <p>{{ c.lat }}, {{ c.lon }}</p>
+                  </ion-label>
+                </ion-item>
+              }
             }
           </ion-list>
         </ion-card-content>

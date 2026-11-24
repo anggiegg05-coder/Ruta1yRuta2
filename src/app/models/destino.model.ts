@@ -1,17 +1,18 @@
-// Categorías permitidas para los destinos
 export type Categoria = 'naturaleza' | 'historia' | 'cultura' | 'aventura' | 'religion';
 
-// Datos de un destino que escribimos en destinos.json
 export interface Destino {
   id: string;
   nombre: string;
   departamento: string;
   ciudad: string;
   categoria: Categoria;
-  wikiTitulo: string;
+  wikiTitulo?: string;
+  descripcion?: string;
+  imagen?: string;
+  lat?: number; 
+  lon?: number; 
 }
 
-// Parte de la respuesta de Wikipedia que vamos a usar
 export interface WikiResumen {
   title: string;
   extract: string;

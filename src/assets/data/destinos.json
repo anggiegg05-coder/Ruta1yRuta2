@@ -1,6 +1,7 @@
 [
   {
     "id": "panteon-heroes",
+    "lat": -25.282227, "lon": -57.635179,
     "nombre": "Panteón Nacional de los Héroes",
     "departamento": "Asunción",
     "ciudad": "Asunción",
@@ -9,6 +10,7 @@
   },
   {
     "id": "palacio-lopez",
+    "lat": -25.27763611, "lon": -57.637569,
     "nombre": "Palacio de López",
     "departamento": "Asunción",
     "ciudad": "Asunción",
@@ -17,14 +19,16 @@
   },
   {
     "id": "lago-ypacarai",
-    "nombre": "Lago Ypacaraí",
-    "departamento": "Cordillera",
-    "ciudad": "San Bernardino",
+    "lat": -25.299439, "lon": -57.373190,
+    "nombre": "Lago Ypacaraí",  
+    "departamento": "Central",
+    "ciudad": "Aregua",
     "categoria": "naturaleza",
     "wikiTitulo": "Lago_Ypacaraí"
   },
   {
     "id": "saltos-monday",
+    "lat": -25.56194444, "lon": -54.63138889,
     "nombre": "Saltos del Monday",
     "departamento": "Alto Paraná",
     "ciudad": "Presidente Franco",
@@ -33,6 +37,7 @@
   },
   {
     "id": "trinidad",
+    "lat": -27.132, "lon": -55.702,
     "nombre": "Misión Jesuítica de Trinidad",
     "departamento": "Itapúa",
     "ciudad": "Trinidad",
@@ -41,6 +46,7 @@
   },
   {
     "id": "cerro-cora",
+    "lat": -22.6514, "lon": -56.0179,
     "nombre": "Parque Nacional Cerro Corá",
     "departamento": "Amambay",
     "ciudad": "Pedro Juan Caballero",
