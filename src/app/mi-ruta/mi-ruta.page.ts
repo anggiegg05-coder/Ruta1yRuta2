@@ -1,14 +1,17 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 import {
   IonContent, IonHeader, IonTitle, IonToolbar, IonSpinner, IonText,
   IonList, IonItem, IonLabel, IonButton, IonIcon, IonBadge,
   IonReorderGroup, IonReorder, ItemReorderEventDetail,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { trashOutline, navigateOutline } from 'ionicons/icons'; // NUEVO: navigateOutline
+import { trashOutline, navigateOutline, locateOutline } from 'ionicons/icons';
 import { DestinosService } from '../services/destinos';
 import { RutaService } from '../services/ruta';
+import { WikipediaService } from '../services/wikipedia';
+import { UbicacionService, Punto } from '../services/ubicacion';
 import { Destino } from '../models/destino.model';
 
 @Component({
@@ -24,11 +27,15 @@ import { Destino } from '../models/destino.model';
 })
 export class MiRutaPage implements OnInit {
   private destinosService = inject(DestinosService);
+  private wikipediaService = inject(WikipediaService);
+  private ubicacionService = inject(UbicacionService);
   ruta = inject(RutaService);
 
   destinos = signal<Destino[]>([]);
   cargando = signal(true);
   error = signal('');
+  ordenando = signal(false);
+  mensajeOrden = signal('');
 
   paradas = computed(() =>
     this.ruta
@@ -38,7 +45,7 @@ export class MiRutaPage implements OnInit {
   );
 
   constructor() {
-    addIcons({ trashOutline, navigateOutline }); // NUEVO: navigateOutline
+    addIcons({ trashOutline, navigateOutline, locateOutline });
   }
 
   ngOnInit() {
@@ -60,6 +67,47 @@ export class MiRutaPage implements OnInit {
     this.ruta.reordenar(nuevoOrden.map((d) => d.id));
   }
 
+ 
+  async ordenarPorCercania() {
+    const lista = this.paradas();
+    if (lista.length < 2) {
+      return;
+    }
+
+    this.ordenando.set(true);
+    this.mensajeOrden.set('');
+
+    try {
+      const miUbicacion = await this.ubicacionService.obtenerUbicacion();
+
+      const conCoordenadas: { destino: Destino; punto: Punto }[] = [];
+      const sinCoordenadas: Destino[] = [];
+
+      for (const d of lista) {
+        const punto = await this.coordenadasDe(d);
+        if (punto) {
+          conCoordenadas.push({ destino: d, punto });
+        } else {
+          sinCoordenadas.push(d);
+        }
+      }
+
+      const ordenados = this.ubicacionService.ordenarPorCercania(miUbicacion, conCoordenadas);
+      const nuevoOrden = [
+        ...ordenados.map((x) => x.destino.id),
+        ...sinCoordenadas.map((d) => d.id),
+      ];
+
+      this.ruta.reordenar(nuevoOrden);
+      this.mensajeOrden.set('✔ Ruta ordenada desde tu ubicación.');
+    } catch (err) {
+      console.warn('No se pudo obtener la ubicación:', err);
+      this.mensajeOrden.set('No pudimos obtener tu ubicación. Revisá que el permiso de ubicación esté activado.');
+    } finally {
+      this.ordenando.set(false);
+    }
+  }
+
   abrirRutaEnGoogleMaps() {
     const lista = this.paradas();
     if (lista.length === 0) {
@@ -79,7 +127,30 @@ export class MiRutaPage implements OnInit {
 
     window.open(url, '_blank');
   }
-    private textoDeLugar(d: Destino): string {
+
+ 
+  private async coordenadasDe(d: Destino): Promise<Punto | undefined> {
+    if (d.lat !== undefined && d.lon !== undefined) {
+      return { lat: d.lat, lon: d.lon };
+    }
+    if (!d.wikiTitulo) {
+      return undefined;
+    }
+    try {
+      const resumen = await firstValueFrom(this.wikipediaService.obtenerResumen(d.wikiTitulo));
+      return resumen.coordinates
+        ? { lat: resumen.coordinates.lat, lon: resumen.coordinates.lon }
+        : undefined;
+    } catch {
+      return undefined;
+    }
+  }
+
+ 
+  private textoDeLugar(d: Destino): string {
+    if (d.lat !== undefined && d.lon !== undefined) {
+      return `${d.lat},${d.lon}`;
+    }
     return `${d.nombre}, ${d.ciudad}, Paraguay`;
   }
 }

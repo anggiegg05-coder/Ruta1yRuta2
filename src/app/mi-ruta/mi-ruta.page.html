@@ -40,6 +40,22 @@
       </ion-reorder-group>
     </ion-list>
         @if (paradas().length > 0) {
+                  <ion-button expand="block" fill="outline" (click)="ordenarPorCercania()"
+                    [disabled]="ordenando() || paradas().length < 2">
+          @if (ordenando()) {
+            <ion-spinner slot="start" name="dots"></ion-spinner>
+            Buscando tu ubicación...
+          } @else {
+            <ion-icon slot="start" name="locate-outline"></ion-icon>
+            Ordenar por cercanía
+          }
+        </ion-button>
+
+        @if (mensajeOrden()) {
+          <ion-text color="medium">
+            <p class="ayuda">{{ mensajeOrden() }}</p>
+          </ion-text>
+        }
       <div class="ion-padding">
         <ion-button expand="block" (click)="abrirRutaEnGoogleMaps()">
           <ion-icon slot="start" name="navigate-outline"></ion-icon>
