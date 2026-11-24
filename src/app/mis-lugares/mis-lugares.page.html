@@ -67,5 +67,20 @@
         </ion-text>
       }
     </ion-list>
+     
+    @if (recomendaciones().length > 0) {
+      <h2 class="titulo-seccion"> Te puede gustar</h2>
+      <ion-list>
+        @for (r of recomendaciones(); track r.destino.id) {
+          <ion-item [routerLink]="['/tabs/explorar', r.destino.id]" [detail]="true" button>
+            <ion-label>
+              <h2>{{ r.destino.nombre }}</h2>
+              <p>Porque te gustó {{ r.porque.nombre }}</p>
+            </ion-label>
+            <ion-chip slot="end" color="tertiary">{{ r.destino.categoria }}</ion-chip>
+          </ion-item>
+        }
+      </ion-list>
+    }
   }
 </ion-content>
