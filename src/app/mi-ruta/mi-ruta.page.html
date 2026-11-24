@@ -46,10 +46,11 @@
           Abrir ruta en Google Maps
         </ion-button>
 
-        @if (paradas().length > 5) {
+          @if (paradas().length > 4) {
           <ion-text color="medium">
-            <p class="ayuda">En el navegador del celular, Google Maps puede mostrar solo algunas paradas. En la app de Google Maps se ven todas (hasta 11).</p>
-          </ion-text>
+            <p class="ayuda">Google Maps permite hasta 10 paradas desde tu ubicación. En el navegador 
+              del celular puede mostrar solo algunas; en la app de Google Maps se ven todas.</p>          
+            </ion-text>
         }
       </div>
     }

@@ -68,22 +68,17 @@ export class MiRutaPage implements OnInit {
 
     const lugares = lista.map((d) => this.textoDeLugar(d));
     const destino = lugares[lugares.length - 1];
+    const intermedias = lugares.slice(0, -1);
 
     let url = `https://www.google.com/maps/dir/?api=1&travelmode=driving`;
     url += `&destination=${encodeURIComponent(destino)}`;
 
-    if (lugares.length > 1) {
-      const origen = lugares[0];
-      const intermedias = lugares.slice(1, -1);
-      url += `&origin=${encodeURIComponent(origen)}`;
-      if (intermedias.length > 0) {
-        url += `&waypoints=${encodeURIComponent(intermedias.join('|'))}`;
-      }
+    if (intermedias.length > 0) {
+      url += `&waypoints=${encodeURIComponent(intermedias.join('|'))}`;
     }
 
     window.open(url, '_blank');
   }
-
     private textoDeLugar(d: Destino): string {
     return `${d.nombre}, ${d.ciudad}, Paraguay`;
   }
