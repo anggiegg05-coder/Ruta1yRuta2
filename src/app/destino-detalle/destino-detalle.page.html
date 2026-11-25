@@ -75,11 +75,16 @@
       </div>
 
       
-      @if (resumen(); as r) {
+            @if (resumen(); as r) {
         <section class="seccion">
           <h2>Sobre este lugar</h2>
           <p class="descripcion">{{ r.extract }}</p>
           <p class="fuente">Fuente: Wikipedia</p>
+        </section>
+      } @else if (d.descripcion) {
+        <section class="seccion">
+          <h2>Sobre este lugar</h2>
+          <p class="descripcion">{{ d.descripcion }}</p>
         </section>
       }
 

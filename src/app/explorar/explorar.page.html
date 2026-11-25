@@ -68,9 +68,11 @@
       </ion-card-header>
       <ion-card-content>
         <ion-chip>{{ destino.categoria }}</ion-chip>
-        @if (resumenes()[destino.id]; as resumen) {
+          @if (resumenes()[destino.id]; as resumen) {
           <p class="descripcion">{{ resumen.extract }}</p>
           <p class="fuente">Fuente: Wikipedia</p>
+        } @else if (destino.descripcion) {
+          <p class="descripcion">{{ destino.descripcion }}</p>
         }
       </ion-card-content>
     </ion-card>

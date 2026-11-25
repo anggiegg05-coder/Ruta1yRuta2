@@ -62,21 +62,23 @@
     "categoria": "cultura",
     "wikiTitulo": "San_Bernardino_(Paraguay)"
   },
-  {
+    {
     "id": "tunel-verde",
     "lat": -25.432900, "lon": -56.825808,
     "nombre": "Túnel Verde",
     "departamento": "Cordillera",
     "ciudad": "Santa Elena",
-    "categoria": "naturaleza"
+    "categoria": "naturaleza",
+    "descripcion": "Está formado por hileras de árboles nativos (principalmente de yvyra pytã) plantados a ambos lados de la carretera cuyas copas se entrelazan, creando un techo natural fresco y sombreado ideal para detenerse a sacar fotografías o disfrutar de la naturaleza."
   },
-  {
+    {
     "id": "cabana-itakua",
     "lat": -25.500550, "lon": -56.916984,
     "nombre": "Cabaña de Itakua",
     "departamento": "Cordillera",
     "ciudad": "Itacurubí de la Cordillera",
-    "categoria": "naturaleza"
+    "categoria": "naturaleza",
+    "descripcion": "La Cabaña Ita Kua es un complejo turístico ecológico y de descanso ubicado en Itacurubí de la Cordillera, famoso por su laguna, formaciones rocosas y entorno boscoso."
   },
   {
     "id": "parque-ybycui",
@@ -93,7 +95,8 @@
     "nombre": "Salto Cristal",
     "departamento": "Paraguarí",
     "ciudad": "Ybycuí",
-    "categoria": "naturaleza"
+    "categoria": "naturaleza",
+    "descripcion": "El Salto Cristal es una de las cascadas más imponentes y famosas del Paraguay, ubicada en el límite entre los departamentos de Paraguarí y Guairá."
   },
   {
     "id": "cerro-yaguaron",
@@ -149,13 +152,14 @@
     "categoria": "historia",
     "wikiTitulo": "Jesús_de_Tavarangüé_(Paraguay)"
   },
-  {
+    {
     "id": "costanera-encarnacion",
     "lat": -27.337347, "lon": -55.872532,
     "nombre": "Costanera de Encarnación",
     "departamento": "Itapúa",
     "ciudad": "Encarnación",
-    "categoria": "cultura"
+    "categoria": "cultura",
+    "descripcion": "La Costanera es el principal atractivo turístico de la capital de Itapúa, ofreciendo playas sobre el río Paraná, bicisendas, gastronomía y vida nocturna durante todo el año."
   },
   {
     "id": "saltos-monday",
