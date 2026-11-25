@@ -17,6 +17,16 @@
     (ionInput)="buscar($event)">
   </ion-searchbar>
 
+  
+  <ion-segment [value]="vista()" (ionChange)="cambiarVista($event)">
+    <ion-segment-button value="lista">
+      <ion-label>Lista</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="mapa">
+      <ion-label>Mapa</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <ion-item>
     <ion-select
       label="Departamento"
@@ -57,37 +67,43 @@
     </ion-text>
   }
 
-  @for (destino of destinosFiltrados(); track destino.id) {
-    <ion-card [routerLink]="['/tabs/explorar', destino.id]" button>
-            @if (destino.imagen) {
-        <div
-          class="foto"
-          role="img"
-          [attr.aria-label]="destino.nombre"
-          [style.background-image]="'url(&quot;' + destino.imagen + '&quot;)'">
-        </div>
-      } @else if (resumenes()[destino.id]?.thumbnail; as foto) {
-        <div
-          class="foto"
-          role="img"
-          [attr.aria-label]="destino.nombre"
-          [style.background-image]="'url(&quot;' + foto.source + '&quot;)'">
-        </div>
-      }
-      <ion-card-header>
-        <ion-card-title>{{ destino.nombre }}</ion-card-title>
-        <ion-card-subtitle>{{ destino.ciudad }}, {{ destino.departamento }}</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-chip>{{ destino.categoria }}</ion-chip>
-        @if (resumenes()[destino.id]; as resumen) {
-          <p class="descripcion">{{ resumen.extract }}</p>
-          <p class="fuente">Fuente: Wikipedia</p>
-        } @else if (destino.descripcion) {
-          <p class="descripcion">{{ destino.descripcion }}</p>
+  @if (vista() === 'mapa') {
+    
+    <app-mapa-destinos [destinos]="destinosFiltrados()"></app-mapa-destinos>
+  } @else {
+    
+    @for (destino of destinosFiltrados(); track destino.id) {
+      <ion-card [routerLink]="['/tabs/explorar', destino.id]" button>
+        @if (destino.imagen) {
+          <div
+            class="foto"
+            role="img"
+            [attr.aria-label]="destino.nombre"
+            [style.background-image]="'url(&quot;' + destino.imagen + '&quot;)'">
+          </div>
+        } @else if (resumenes()[destino.id]?.thumbnail; as foto) {
+          <div
+            class="foto"
+            role="img"
+            [attr.aria-label]="destino.nombre"
+            [style.background-image]="'url(&quot;' + foto.source + '&quot;)'">
+          </div>
         }
-      </ion-card-content>
-    </ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ destino.nombre }}</ion-card-title>
+          <ion-card-subtitle>{{ destino.ciudad }}, {{ destino.departamento }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip>{{ destino.categoria }}</ion-chip>
+          @if (resumenes()[destino.id]; as resumen) {
+            <p class="descripcion">{{ resumen.extract }}</p>
+            <p class="fuente">Fuente: Wikipedia</p>
+          } @else if (destino.descripcion) {
+            <p class="descripcion">{{ destino.descripcion }}</p>
+          }
+        </ion-card-content>
+      </ion-card>
+    }
   }
 
   @if (!cargando() && !error() && destinosFiltrados().length === 0) {

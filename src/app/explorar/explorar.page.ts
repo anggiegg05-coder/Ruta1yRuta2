@@ -11,6 +11,7 @@ import {
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { Destino, WikiResumen } from '../models/destino.model';
+import { MapaDestinos } from '../components/mapa-destinos/mapa-destinos';
 
 @Component({
   selector: 'app-explorar',
@@ -21,7 +22,7 @@ import { Destino, WikiResumen } from '../models/destino.model';
     IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent,
     IonSpinner, IonChip, IonText, IonSearchbar,
     IonItem, IonSelect, IonSelectOption, IonSegment, IonSegmentButton, IonLabel,
-    CommonModule, FormsModule, RouterLink,
+    CommonModule, FormsModule, RouterLink, MapaDestinos,
   ],
 })
 export class ExplorarPage implements OnInit {
@@ -35,6 +36,7 @@ export class ExplorarPage implements OnInit {
   busqueda = signal('');
   departamentoSeleccionado = signal('todos');
   categoriaSeleccionada = signal('todas');
+  vista = signal<'lista' | 'mapa'>('lista');
 
   departamentos = computed(() =>
     [...new Set(this.destinos().map((d) => d.departamento))].sort()
@@ -87,6 +89,10 @@ export class ExplorarPage implements OnInit {
 
   cambiarCategoria(evento: CustomEvent) {
     this.categoriaSeleccionada.set(evento.detail.value);
+  }
+
+  cambiarVista(evento: CustomEvent) {
+    this.vista.set(evento.detail.value);
   }
 
   private cargarResumenes(destinos: Destino[]) {
