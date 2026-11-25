@@ -6,7 +6,9 @@
 .foto {
   width: 100%;
   height: 180px;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ion-color-light);
 }
 
 .descripcion {

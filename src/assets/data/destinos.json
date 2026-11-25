@@ -69,7 +69,8 @@
     "departamento": "Cordillera",
     "ciudad": "Santa Elena",
     "categoria": "naturaleza",
-    "descripcion": "Está formado por hileras de árboles nativos (principalmente de yvyra pytã) plantados a ambos lados de la carretera cuyas copas se entrelazan, creando un techo natural fresco y sombreado ideal para detenerse a sacar fotografías o disfrutar de la naturaleza."
+    "descripcion": "Está formado por hileras de árboles nativos (principalmente de yvyra pytã) plantados a ambos lados de la carretera cuyas copas se entrelazan,creando un techo natural fresco y sombreado ideal para detenerse a sacar fotografías o disfrutar de la naturaleza.",
+    "imagen": "assets/img/tunel-verde.jpg"
   },
     {
     "id": "cabana-itakua",
@@ -78,7 +79,8 @@
     "departamento": "Cordillera",
     "ciudad": "Itacurubí de la Cordillera",
     "categoria": "naturaleza",
-    "descripcion": "La Cabaña Ita Kua es un complejo turístico ecológico y de descanso ubicado en Itacurubí de la Cordillera, famoso por su laguna, formaciones rocosas y entorno boscoso."
+    "descripcion": "La Cabaña Ita Kua es un complejo turístico ecológico y de descanso ubicado en Itacurubí de la Cordillera, famoso por su laguna, formaciones rocosas y entorno boscoso.",
+    "imagen": "assets/img/cabana-itakua.jpg"
   },
   {
     "id": "parque-ybycui",
@@ -87,7 +89,8 @@
     "departamento": "Paraguarí",
     "ciudad": "Ybycuí",
     "categoria": "naturaleza",
-    "wikiTitulo": "Parque_nacional_Ybycuí"
+    "wikiTitulo": "Parque_nacional_Ybycuí",
+    "imagen": "assets/img/parque-ybycui.jpg"
   },
   {
     "id": "salto-cristal",
@@ -96,7 +99,8 @@
     "departamento": "Paraguarí",
     "ciudad": "Ybycuí",
     "categoria": "naturaleza",
-    "descripcion": "El Salto Cristal es una de las cascadas más imponentes y famosas del Paraguay, ubicada en el límite entre los departamentos de Paraguarí y Guairá."
+    "descripcion": "El Salto Cristal es una de las cascadas más imponentes y famosas del Paraguay, ubicada en el límite entre los departamentos de Paraguarí y Guairá.",
+    "imagen": "assets/img/salto-cristal.jpg"
   },
   {
     "id": "cerro-yaguaron",
@@ -159,7 +163,8 @@
     "departamento": "Itapúa",
     "ciudad": "Encarnación",
     "categoria": "cultura",
-    "descripcion": "La Costanera es el principal atractivo turístico de la capital de Itapúa, ofreciendo playas sobre el río Paraná, bicisendas, gastronomía y vida nocturna durante todo el año."
+    "descripcion": "La Costanera es el principal atractivo turístico de la capital de Itapúa, ofreciendo playas sobre el río Paraná, bicisendas, gastronomía y vida nocturna durante todo el año.",
+    "imagen": "assets/img/costanera-encarnacion.jpg"
   },
   {
     "id": "saltos-monday",
@@ -177,7 +182,8 @@
     "departamento": "Alto Paraná",
     "ciudad": "Hernandarias",
     "categoria": "cultura",
-    "wikiTitulo": "Represa_de_Itaipú"
+    "wikiTitulo": "Represa_de_Itaipú",
+    "imagen": "assets/img/represa-itaipu.jpg"
   },
   {
     "id": "laguna-blanca",

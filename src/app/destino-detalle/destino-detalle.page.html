@@ -23,7 +23,10 @@
   @if (destino(); as d) {
     
     <div class="portada">
-      @if (resumen()?.originalimage; as foto) {
+            @if (d.imagen) {
+        <div class="foto" role="img" [attr.aria-label]="d.nombre"
+             [style.background-image]="'url(&quot;' + d.imagen + '&quot;)'"></div>
+      } @else if (resumen()?.originalimage; as foto) {
         <div class="foto" role="img" [attr.aria-label]="d.nombre"
              [style.background-image]="'url(&quot;' + foto.source + '&quot;)'"></div>
       }
@@ -45,7 +48,7 @@
           </div>
         </ion-button>
 
-          <ion-button fill="clear" color="success" class="accion" (click)="compartirPorWhatsApp()">
+        <ion-button fill="clear" color="success" class="accion" (click)="compartirPorWhatsApp()">
           <div class="accion-contenido">
             <ion-icon name="logo-whatsapp"></ion-icon>
             <span>Compartir</span>
@@ -75,7 +78,7 @@
       </div>
 
       
-            @if (resumen(); as r) {
+      @if (resumen(); as r) {
         <section class="seccion">
           <h2>Sobre este lugar</h2>
           <p class="descripcion">{{ r.extract }}</p>
@@ -108,7 +111,6 @@
               </ion-label>
             </ion-item>
 
-            
             @if (d.lat !== undefined && d.lon !== undefined) {
               <ion-item lines="none">
                 <ion-label class="dato">
