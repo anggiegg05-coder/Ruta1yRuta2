@@ -11,24 +11,55 @@ export class CompartirService {
     window.open(url, '_blank');
   }
 
-  // Mensaje para compartir un lugar
+  
   textoDeLugar(d: Destino): string {
     return [
-      `📍 *${d.nombre}*`,
+      ` *${d.nombre}*`,
       `${d.ciudad}, ${d.departamento}`,
       ``,
-      `🗺️ Cómo llegar: ${this.enlaceMapa(d)}`,
+      ` Cómo llegar: ${this.enlaceMapa(d)}`,
       ``,
       `Compartido desde Ruta1yRuta2 🇵🇾`,
     ].join('\n');
   }
 
-  // Enlace de Google Maps de un lugar (coordenadas si hay; si no, el nombre)
+  
+  textoDeRuta(paradas: Destino[]): string {
+    const lineas = paradas.map((d, i) => `${i + 1}. ${d.nombre} (${d.ciudad})`);
+    return [
+      ` *Mi ruta por Paraguay*`,
+      ``,
+      ...lineas,
+      ``,
+      ` Ver la ruta en Google Maps: ${this.enlaceRuta(paradas)}`,
+      ``,
+      `Armada con Ruta1yRuta2 🇵🇾`,
+    ].join('\n');
+  }
+
+  
   enlaceMapa(d: Destino): string {
-    const consulta =
-      d.lat !== undefined && d.lon !== undefined
-        ? `${d.lat},${d.lon}`
-        : `${d.nombre}, ${d.ciudad}, Paraguay`;
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.consultaDe(d))}`;
+  }
+
+  
+  enlaceRuta(paradas: Destino[]): string {
+    const lugares = paradas.map((d) => this.consultaDe(d));
+    const destino = lugares[lugares.length - 1];
+    const intermedias = lugares.slice(0, -1);
+
+    let url = `https://www.google.com/maps/dir/?api=1&travelmode=driving`;
+    url += `&destination=${encodeURIComponent(destino)}`;
+    if (intermedias.length > 0) {
+      url += `&waypoints=${encodeURIComponent(intermedias.join('|'))}`;
+    }
+    return url;
+  }
+
+ 
+  private consultaDe(d: Destino): string {
+    return d.lat !== undefined && d.lon !== undefined
+      ? `${d.lat},${d.lon}`
+      : `${d.nombre}, ${d.ciudad}, Paraguay`;
   }
 }

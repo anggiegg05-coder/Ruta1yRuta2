@@ -7,11 +7,12 @@ import {
   IonReorderGroup, IonReorder, ItemReorderEventDetail,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { trashOutline, navigateOutline, locateOutline } from 'ionicons/icons';
+import { trashOutline, navigateOutline, locateOutline, logoWhatsapp } from 'ionicons/icons';
 import { DestinosService } from '../services/destinos';
 import { RutaService } from '../services/ruta';
 import { WikipediaService } from '../services/wikipedia';
 import { UbicacionService, Punto } from '../services/ubicacion';
+import { CompartirService } from '../services/compartir';
 import { Destino } from '../models/destino.model';
 
 @Component({
@@ -29,6 +30,7 @@ export class MiRutaPage implements OnInit {
   private destinosService = inject(DestinosService);
   private wikipediaService = inject(WikipediaService);
   private ubicacionService = inject(UbicacionService);
+  private compartirService = inject(CompartirService);
   ruta = inject(RutaService);
 
   destinos = signal<Destino[]>([]);
@@ -45,7 +47,7 @@ export class MiRutaPage implements OnInit {
   );
 
   constructor() {
-    addIcons({ trashOutline, navigateOutline, locateOutline });
+    addIcons({ trashOutline, navigateOutline, locateOutline, logoWhatsapp });
   }
 
   ngOnInit() {
@@ -67,7 +69,6 @@ export class MiRutaPage implements OnInit {
     this.ruta.reordenar(nuevoOrden.map((d) => d.id));
   }
 
- 
   async ordenarPorCercania() {
     const lista = this.paradas();
     if (lista.length < 2) {
@@ -108,6 +109,14 @@ export class MiRutaPage implements OnInit {
     }
   }
 
+  compartirRutaPorWhatsApp() {
+    const lista = this.paradas();
+    if (lista.length === 0) {
+      return;
+    }
+    this.compartirService.porWhatsApp(this.compartirService.textoDeRuta(lista));
+  }
+
   abrirRutaEnGoogleMaps() {
     const lista = this.paradas();
     if (lista.length === 0) {
@@ -128,7 +137,6 @@ export class MiRutaPage implements OnInit {
     window.open(url, '_blank');
   }
 
- 
   private async coordenadasDe(d: Destino): Promise<Punto | undefined> {
     if (d.lat !== undefined && d.lon !== undefined) {
       return { lat: d.lat, lon: d.lon };
@@ -146,7 +154,6 @@ export class MiRutaPage implements OnInit {
     }
   }
 
- 
   private textoDeLugar(d: Destino): string {
     if (d.lat !== undefined && d.lon !== undefined) {
       return `${d.lat},${d.lon}`;
