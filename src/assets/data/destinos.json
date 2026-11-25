@@ -18,13 +18,144 @@
     "wikiTitulo": "Palacio_de_López"
   },
   {
+    "id": "casa-independencia",
+    "lat": -25.280569, "lon": -57.636222,
+    "nombre": "Casa de la Independencia",
+    "departamento": "Asunción",
+    "ciudad": "Asunción",
+    "categoria": "historia",
+    "wikiTitulo": "Museo_Casa_de_la_Independencia"
+    },
+  {
     "id": "lago-ypacarai",
     "lat": -25.299439, "lon": -57.373190,
-    "nombre": "Lago Ypacaraí",  
+    "nombre": "Lago Ypacaraí",
     "departamento": "Central",
-    "ciudad": "Aregua",
+    "ciudad": "Areguá",
     "categoria": "naturaleza",
     "wikiTitulo": "Lago_Ypacaraí"
+  },
+  {
+    "id": "cerro-koi",
+    "lat": -25.323611, "lon": -57.398586,
+    "nombre": "Cerro Kõi",
+    "departamento": "Central",
+    "ciudad": "Areguá",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Cerro_Coi"
+  },
+  {
+    "id": "basilica-caacupe",
+    "lat": -25.386, "lon": -57.141,
+    "nombre": "Basílica de Caacupé",
+    "departamento": "Cordillera",
+    "ciudad": "Caacupé",
+    "categoria": "religion",
+    "wikiTitulo": "Catedral_de_Nuestra_Señora_de_los_Milagros_(Caacupé)"
+  },
+  {
+    "id": "san-bernardino",
+    "lat": -25.310556, "lon": -57.296111,
+    "nombre": "San Bernardino",
+    "departamento": "Cordillera",
+    "ciudad": "San Bernardino",
+    "categoria": "cultura",
+    "wikiTitulo": "San_Bernardino_(Paraguay)"
+  },
+  {
+    "id": "tunel-verde",
+    "lat": -25.432900, "lon": -56.825808,
+    "nombre": "Túnel Verde",
+    "departamento": "Cordillera",
+    "ciudad": "Santa Elena",
+    "categoria": "naturaleza"
+  },
+  {
+    "id": "cabana-itakua",
+    "lat": -25.500550, "lon": -56.916984,
+    "nombre": "Cabaña de Itakua",
+    "departamento": "Cordillera",
+    "ciudad": "Itacurubí de la Cordillera",
+    "categoria": "naturaleza"
+  },
+  {
+    "id": "parque-ybycui",
+    "lat": -26.095446, "lon": -56.838713,
+    "nombre": "Parque Nacional Ybycuí",
+    "departamento": "Paraguarí",
+    "ciudad": "Ybycuí",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Parque_nacional_Ybycuí"
+  },
+  {
+    "id": "salto-cristal",
+    "lat": -25.978295, "lon": -56.729220,
+    "nombre": "Salto Cristal",
+    "departamento": "Paraguarí",
+    "ciudad": "Ybycuí",
+    "categoria": "naturaleza"
+  },
+  {
+    "id": "cerro-yaguaron",
+    "lat": -25.570861, "lon": -57.294206,
+    "nombre": "Cerro Yaguarón",
+    "departamento": "Paraguarí",
+    "ciudad": "Yaguarón",
+    "categoria": "aventura",
+    "wikiTitulo": "Cerro_Yaguarón"
+  },
+  {
+    "id": "ecorreserva-mbatovi",
+    "lat": -25.574218, "lon": -57.093753,
+    "nombre": "Ecorreserva Mbatoví",
+    "departamento": "Paraguarí",
+    "ciudad": "Paraguarí",
+    "categoria": "aventura",
+    "wikiTitulo": "Ecorreserva_Mbatoví"
+  },
+  {
+    "id": "cordillera-ybytyruzu",
+    "lat": -25.833459, "lon": -56.250031,
+    "nombre": "Cordillera del Ybytyruzú",
+    "departamento": "Guairá",
+    "ciudad": "Colonia Independencia",
+    "categoria": "aventura",
+    "wikiTitulo": "Cordillera_del_Ybytyruzú"
+  },
+  {
+    "id": "cerro-tres-kandu",
+    "lat": -25.901667, "lon": -56.16,
+    "nombre": "Cerro Tres Kandú",
+    "departamento": "Guairá",
+    "ciudad": "Colonia Independencia",
+    "categoria": "aventura",
+    "wikiTitulo": "Cerro_Tres_Kandú"
+  },
+  {
+    "id": "trinidad",
+    "lat": -27.132, "lon": -55.702,
+    "nombre": "Misión Jesuítica de Trinidad",
+    "departamento": "Itapúa",
+    "ciudad": "Trinidad",
+    "categoria": "historia",
+    "wikiTitulo": "Misión_jesuítica_de_La_Santísima_Trinidad_de_Paraná"
+  },
+  {
+    "id": "jesus-tavarangue",
+    "lat": -27.056, "lon": -55.74,
+    "nombre": "Jesús de Tavarangüé",
+    "departamento": "Itapúa",
+    "ciudad": "Jesús",
+    "categoria": "historia",
+    "wikiTitulo": "Jesús_de_Tavarangüé_(Paraguay)"
+  },
+  {
+    "id": "costanera-encarnacion",
+    "lat": -27.337347, "lon": -55.872532,
+    "nombre": "Costanera de Encarnación",
+    "departamento": "Itapúa",
+    "ciudad": "Encarnación",
+    "categoria": "cultura"
   },
   {
     "id": "saltos-monday",
@@ -36,13 +167,22 @@
     "wikiTitulo": "Cataratas_del_Monday"
   },
   {
-    "id": "trinidad",
-    "lat": -27.132, "lon": -55.702,
-    "nombre": "Misión Jesuítica de Trinidad",
-    "departamento": "Itapúa",
-    "ciudad": "Trinidad",
-    "categoria": "historia",
-    "wikiTitulo": "Misión_jesuítica_de_La_Santísima_Trinidad_de_Paraná"
+    "id": "represa-itaipu",
+    "lat": -25.406161, "lon": -54.589462,
+    "nombre": "Represa de Itaipú",
+    "departamento": "Alto Paraná",
+    "ciudad": "Hernandarias",
+    "categoria": "cultura",
+    "wikiTitulo": "Represa_de_Itaipú"
+  },
+  {
+    "id": "laguna-blanca",
+    "lat": -23.813333, "lon": -56.295,
+    "nombre": "Laguna Blanca",
+    "departamento": "San Pedro",
+    "ciudad": "Santa Rosa del Aguaray",
+    "categoria": "naturaleza",
+    "wikiTitulo": "Laguna_Blanca_(Paraguay)"
   },
   {
     "id": "cerro-cora",
