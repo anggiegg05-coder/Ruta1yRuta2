@@ -8,12 +8,13 @@ import {
 import { addIcons } from 'ionicons';
 import {
   mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
-  addCircleOutline, removeCircleOutline,
+  addCircleOutline, removeCircleOutline,logoWhatsapp,
 } from 'ionicons/icons';
 import { DestinosService } from '../services/destinos';
 import { WikipediaService } from '../services/wikipedia';
 import { MisLugaresService } from '../services/mis-lugares';
 import { RutaService } from '../services/ruta';
+import { CompartirService } from '../services/compartir';
 import { Destino, WikiResumen } from '../models/destino.model';
 
 @Component({
@@ -34,6 +35,7 @@ export class DestinoDetallePage implements OnInit {
   private wikipediaService = inject(WikipediaService);
   misLugares = inject(MisLugaresService);
   ruta = inject(RutaService);
+  private compartirService = inject(CompartirService);
 
   destino = signal<Destino | undefined>(undefined);
   resumen = signal<WikiResumen | undefined>(undefined);
@@ -43,7 +45,7 @@ export class DestinoDetallePage implements OnInit {
   constructor() {
     addIcons({
       mapOutline, heart, heartOutline, checkmarkCircle, checkmarkCircleOutline,
-      addCircleOutline, removeCircleOutline,
+      addCircleOutline, removeCircleOutline,logoWhatsapp, 
     });
   }
 
@@ -66,7 +68,7 @@ export class DestinoDetallePage implements OnInit {
     });
   }
 
-  // NUEVO: prioridad 1) coordenadas del JSON, 2) de Wikipedia, 3) nombre del lugar
+  
   abrirEnGoogleMaps() {
     const d = this.destino();
     if (!d) {
@@ -84,6 +86,13 @@ export class DestinoDetallePage implements OnInit {
 
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
     window.open(url, '_blank');
+  }
+  compartirPorWhatsApp() {
+    const d = this.destino();
+    if (!d) {
+      return;
+    }
+    this.compartirService.porWhatsApp(this.compartirService.textoDeLugar(d));
   }
 
   private cargarResumen(destino: Destino) {

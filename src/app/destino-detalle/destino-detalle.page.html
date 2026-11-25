@@ -45,6 +45,13 @@
           </div>
         </ion-button>
 
+                <ion-button fill="clear" color="success" class="accion" (click)="compartirPorWhatsApp()">
+          <div class="accion-contenido">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <span>Compartir</span>
+          </div>
+        </ion-button>
+        
         <ion-button fill="clear" color="danger" class="accion" (click)="misLugares.alternarFavorito(d.id)">
           <div class="accion-contenido">
             <ion-icon [name]="misLugares.esFavorito(d.id) ? 'heart' : 'heart-outline'"></ion-icon>
